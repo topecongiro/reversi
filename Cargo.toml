@@ -10,6 +10,8 @@ keywords = ["reversi", "othello", "rusthello"]
 [dependencies]
 clippy = {version = "*", optional = true}
 rand = "0.3.*"
+serde = "1.0"
+serde_derive = "1.0"
 
 # The release profile, used for `cargo build --release`.
 [profile.release]

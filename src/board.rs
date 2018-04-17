@@ -97,7 +97,7 @@ impl Coord {
 }
 
 /// A disk is characterized by its two sides, one Dark and one Light.
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct Disk(::Side);
 
 impl Disk {
@@ -123,7 +123,7 @@ impl Disk {
 /// Each cell in the board can either be empty or taken by one of the players.
 pub type Cell = Option<Disk>;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Serialize, Deserialize)]
 pub struct Board([[Cell; BOARD_SIZE]; BOARD_SIZE]);
 
 impl fmt::Debug for Board {
@@ -155,7 +155,7 @@ impl Board {
 
     #[inline(always)]
     pub fn flip_disk(&mut self, coord: Coord) -> Result<()> {
-        self.get_mut_cell(coord).and_then(|mut cell| {
+        self.get_mut_cell(coord).and_then(|cell| {
             cell.as_mut()
                 .ok_or_else(|| ::ReversiError::EmptyCell(coord))?
                 .flip();
@@ -170,7 +170,7 @@ impl Board {
 
     #[inline(always)]
     pub fn place_disk(&mut self, side: ::Side, coord: Coord) -> Result<()> {
-        self.get_mut_cell(coord).and_then(|mut cell| {
+        self.get_mut_cell(coord).and_then(|cell| {
             if cell.is_some() {
                 Err(::ReversiError::CellAlreadyTaken(coord))
             } else {

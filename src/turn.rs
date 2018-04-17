@@ -8,7 +8,7 @@ pub type State = Option<::Side>;
 
 /// A turn is given by a board and by which player has to move next.
 /// For convenience we also annotate current scores.
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct Turn {
     board: Board,
     state: State,

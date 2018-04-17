@@ -10,6 +10,10 @@
 #![cfg_attr(feature="clippy", feature(plugin))]
 #![cfg_attr(feature="clippy", plugin(clippy))]
 
+extern crate serde;
+#[macro_use]
+extern crate serde_derive;
+
 pub mod board;
 pub mod turn;
 pub mod game;
@@ -58,7 +62,7 @@ impl fmt::Display for ReversiError {
 }
 
 /// There are two sides in Reversi: `Dark` and `Light`
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
 pub enum Side {
     Dark,
     Light,
