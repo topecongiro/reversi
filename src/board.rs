@@ -123,7 +123,7 @@ impl Disk {
 /// Each cell in the board can either be empty or taken by one of the players.
 pub type Cell = Option<Disk>;
 
-#[derive(Clone, Copy, Serialize, Deserialize)]
+#[derive(Clone, Copy, Serialize, Deserialize, Default)]
 pub struct Board([[Cell; BOARD_SIZE]; BOARD_SIZE]);
 
 impl fmt::Debug for Board {
